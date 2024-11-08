@@ -37,17 +37,7 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        {!isMenuOpen ? (
-          <div className={styles.burger_wrap} onClick={openMenu}>
-            <Icon name="icon-menu-burger" width={16} height={16} />
-          </div>
-        ) : (
-          <div className={styles.burger_wrap} onClick={closeMenu}>
-            <Icon name="icon-menu-close" width={16} height={16} />
-          </div>
-        )}
-
-        <MobMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
+       
       </div>
     </header>
   );
