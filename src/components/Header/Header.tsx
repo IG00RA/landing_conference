@@ -3,22 +3,8 @@
 import styles from './Header.module.css';
 import { navItems } from '@/data/data';
 import Icon from '@/helpers/Icon';
-import { useState } from 'react';
-import MobMenu from '../MobMenu/MobMenu';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    document.body.style.overflow = 'auto';
-    document.body.style.touchAction = 'auto';
-  };
-  const openMenu = () => {
-    setIsMenuOpen(true);
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-  };
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -36,8 +22,7 @@ export default function Header() {
               </li>
             ))}
           </ul>
-        </nav>
-       
+        </nav>       
       </div>
     </header>
   );
