@@ -28,6 +28,10 @@
 }
 
 .link {
+  @media (pointer: coarse) {
+    box-shadow: 0px 20px 31.4px -13px #373aff66;
+  }
+  transition: box-shadow 0.3s ease;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -53,6 +57,10 @@
       line-height: 21.94px;
       max-width: 390px;
     }
+  }
+  &:hover,
+  &:focus {
+    box-shadow: 0px 20px 31.4px -13px #373aff66;
   }
 }
 
@@ -220,12 +228,15 @@ ul li:nth-child(3) .logo {
 }
 
 .button {
+  @media (pointer: coarse) {
+    box-shadow: 0px 20px 31.4px -13px #373aff66;
+  }
+  transition: box-shadow 0.3s ease;
   font-size: var(--fs-small);
   font-weight: 600;
   line-height: 19.5px;
   display: block;
   padding: 18px 15px;
-  box-shadow: 0px 20px 31.4px -13px rgba(55, 58, 255, 0.4);
   background-image: var(--main-grad);
   border-radius: 200px;
   text-align: center;
@@ -239,5 +250,9 @@ ul li:nth-child(3) .logo {
     font-size: var(--fs-medium);
     padding: 21px 38px;
     line-height: 21.94px;
+  }
+  &:hover,
+  &:focus {
+    box-shadow: 0px 20px 31.4px -13px #373aff66;
   }
 }

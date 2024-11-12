@@ -11,24 +11,44 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   handleLanguageChange,
   locale,
 }) => {
-  const [isButtonVisible, setIsButtonVisible] = useState(false);
+  const [isButtonsVisible, setIsButtonsVisible] = useState(false);
 
-  const oppositeLanguage = locale === 'ru' ? 'en' : 'ru';
-
-  const handleIconClick = () => setIsButtonVisible(!isButtonVisible);
+  const handleIconClick = () => setIsButtonsVisible(!isButtonsVisible);
 
   return (
     <div className={styles.language}>
-      <div onClick={handleIconClick} className={styles.icon}>
-        <Icon name="icon-lang" width={60} height={24} />
+      <div
+        onClick={handleIconClick}
+        className={`${styles.icon} ${
+          isButtonsVisible ? styles.iconActive : ''
+        }`}
+      >
+        <Icon name="icon-network" width={24} height={24} />
+        <Icon name="icon-down" width={24} height={24} />
+      </div>
+
+      <div
+        className={`${styles.buttonsContainer} ${
+          isButtonsVisible ? styles.containerActive : ''
+        }`}
+      >
         <button
           className={`${styles.button} ${
-            isButtonVisible ? styles.buttonActive : ''
+            locale === 'ru' ? styles.buttonActive : ''
           }`}
-          onClick={() => handleLanguageChange(oppositeLanguage)}
+          onClick={() => handleLanguageChange('ru')}
           type="button"
         >
-          {oppositeLanguage.toUpperCase()}
+          RU
+        </button>
+        <button
+          className={`${styles.button} ${
+            locale === 'en' ? styles.buttonActive : ''
+          }`}
+          onClick={() => handleLanguageChange('en')}
+          type="button"
+        >
+          EN
         </button>
       </div>
     </div>
