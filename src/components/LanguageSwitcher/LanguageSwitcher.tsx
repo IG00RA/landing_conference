@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styles from './LanguageSwitcher.module.css';
+import Icon from '@/helpers/Icon';
 
 interface LanguageSwitcherProps {
   handleLanguageChange: (language: string) => void;
@@ -8,23 +10,29 @@ interface LanguageSwitcherProps {
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   handleLanguageChange,
   locale,
-}) => (
-  <div className={styles.language}>
-    <button
-      className={`${locale === 'ru' ? styles.buttonActive : ''}`}
-      onClick={() => handleLanguageChange('ru')}
-      type="button"
-    >
-      RU
-    </button>
-    <button
-      className={`${locale === 'en' ? styles.buttonActive : ''}`}
-      onClick={() => handleLanguageChange('en')}
-      type="button"
-    >
-      EN
-    </button>
-  </div>
-);
+}) => {
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
+
+  const oppositeLanguage = locale === 'ru' ? 'en' : 'ru';
+
+  const handleIconClick = () => setIsButtonVisible(!isButtonVisible);
+
+  return (
+    <div className={styles.language}>
+      <div onClick={handleIconClick} className={styles.icon}>
+        <Icon name="icon-lang" width={60} height={24} />
+        <button
+          className={`${styles.button} ${
+            isButtonVisible ? styles.buttonActive : ''
+          }`}
+          onClick={() => handleLanguageChange(oppositeLanguage)}
+          type="button"
+        >
+          {oppositeLanguage.toUpperCase()}
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default LanguageSwitcher;

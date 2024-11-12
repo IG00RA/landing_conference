@@ -1,38 +1,39 @@
 .language {
+  @media (max-width: 767px) {
+    margin-right: 55px;
+  }
+  @media (max-width: 359px) {
+    margin-right: 45px;
+  }
+  display: block;
+}
+
+.icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.button {
+  font-size: 16px;
+  line-height: 19.5px;
+  color: var(--foreground);
+  padding: 5px 10px;
+  opacity: 0;
   position: absolute;
-  top: 22px;
-  right: 65px;
-  display: flex;
-  gap: 5px;
-  & button {
-    font-size: 16px;
-    line-height: 19.5px;
-    color: var(--foreground);
-    transition: text-shadow 0.3s ease, color 0.3s ease;
-
-    &:hover,
-    &:focus {
-      text-shadow: 0px 0 currentColor, 0px 0 currentColor;
-    }
-  }
-
-  @media (min-width: 360px) {
-    gap: 10px;
-    right: 80px;
-  }
-  @media (min-width: 768px) {
-    flex-direction: column;
-    position: static;
-  }
-  @media (min-width: 1024px) {
-    gap: 16px;
-  }
-  @media (min-width: 1408px) {
-    flex-direction: row;
-  }
+  top: 100%;
+  left: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  background-color: rgba(240, 237, 246, 0.3);
+  border-radius: 100px;
 }
 
 .buttonActive {
-  font-size: 18px;
-  font-weight: bold;
+  opacity: 1;
+  transform: translateY(0);
+
+  &:hover,
+  &:focus {
+    text-shadow: 0px 0 currentColor, 0px 0 currentColor;
+  }
 }
