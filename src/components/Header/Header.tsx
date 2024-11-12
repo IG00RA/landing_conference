@@ -6,8 +6,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import styles from './Header.module.css';
 import Icon from '@/helpers/Icon';
 import MobMenu from '../MobMenu/MobMenu';
-import React, { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { navItems } from '@/data/data';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 export default function Header({ locale }: { locale: string }) {
   const pathname = usePathname();
@@ -17,10 +18,9 @@ export default function Header({ locale }: { locale: string }) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value as string;
+  const handleLanguageChange = (lang: string) => {
     const path = pathname.split('/').slice(2).join('/');
-    router.push(`/${newLocale}/${path}`);
+    router.push(`/${lang}/${path}`);
   };
 
   const closeMenu = () => {
@@ -39,17 +39,23 @@ export default function Header({ locale }: { locale: string }) {
         <Icon name="icon-logo" width={48} height={40} />
         <span className={styles.logo_text}>{t('Header.home')}</span>
       </Link>
-      <nav className={styles.nav}>
-        <ul className={styles.nav_list}>
-          {navItems.map((item, index) => (
-            <li key={index}>
-              <Link className={styles.nav_link} href={item.href}>
-                {t(item.label)}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className={styles.nav_wrap}>
+        <nav className={styles.nav}>
+          <ul className={styles.nav_list}>
+            {navItems.map((item, index) => (
+              <li key={index}>
+                <Link className={styles.nav_link} href={item.href}>
+                  {t(item.label)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher
+          locale={locale}
+          handleLanguageChange={handleLanguageChange}
+        />
+      </div>
       {!isMenuOpen ? (
         <div className={styles.burger_wrap} onClick={openMenu}>
           <Icon name="icon-menu-burger" width={16} height={16} />
@@ -59,16 +65,7 @@ export default function Header({ locale }: { locale: string }) {
           <Icon name="icon-menu-close" width={16} height={16} />
         </div>
       )}
-
       <MobMenu isMenuOpen={isMenuOpen} closeMenu={closeMenu} />
-      <select
-        className={styles.language}
-        value={locale}
-        onChange={handleLanguageChange}
-      >
-        <option value="en">EN</option>
-        <option value="ru">RU</option>
-      </select>
     </header>
   );
 }
